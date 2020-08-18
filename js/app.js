@@ -59,7 +59,7 @@ var App = (function() {
         Player.nextAudio();
         break;
       case 48: // Key 0
-        UI.get('log').classList.toggle('hide');
+        loadIPTVorg();
         break;
       case 49: // Key 1
         Player.set4k(true)
@@ -70,16 +70,52 @@ var App = (function() {
       case 51: // Key 3
       case 52: // Key 4
       case 53: // Key 5
+        UI.get('log').classList.toggle('hide');
+        break;
       case 54: // Key 6
       case 55: // Key 7
       case 56: // Key 8
       case 57: // Key 9
+        loadLocal()
+        break;
       // default:
         log('key:', key);
         break;
     }
   });
 
+  function loadIPTVorg() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'data/iptv-org-eng.m3u8', true);
+    xhr.send(null);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 0 || xhr.status == 200) {
+          var channels = Parser.parse(xhr.responseText);
+          UI.setChannels(channels);
+          Player.init(tv);
+        } else {
+          log('Error loading playlist:', xhr.status);
+        }
+      }
+    };
+  };
+  function loadLocal() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'data/playlist.m3u8 ', true);
+    xhr.send(null);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 0 || xhr.status == 200) {
+          var channels = Parser.parse(xhr.responseText);
+          UI.setChannels(channels);
+          Player.init(tv);
+        } else {
+          log('Error loading playlist:', xhr.status);
+        }
+      }
+    };
+  };
   // On DOM loaded
   function onLoad() {
 
