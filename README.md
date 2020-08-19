@@ -2,7 +2,7 @@
 
 Hackable Samsung Smart TV (Tizen) video/stream player.
 
-![Photoshot of hackTV](https://i.imgur.com/i2i5gKq.jpg)
+![Photoshot of hackTV](https://i.imgur.com/UfskXPs.png)
 
 # How to run/debug?
 
