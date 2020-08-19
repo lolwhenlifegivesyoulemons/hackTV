@@ -13,21 +13,35 @@ var Parser = (function() {
         data.forEach((elem, index)=>{
           if(elem.includes('tvg-logo')) data.splice(index, 1);
         });
-        data.forEach((elem, index)=>{
-          if(!elem.split('"')[1]) return;
-          if(elem.includes('24/7')) data[index] = "" //patch out undefined if channel includes 24/7
-          if(elem.startsWith('group')) data[index] = ","+elem.split('"')[1]+" ~ "+elem.split('"')[2].replace(',', '');
-        })
-        data = data.join(' ').replace(/1 ,/g, '1,');
+        if(data.includes('\n\n')) {
+          data = data.join(' ').replace(/\n\n/g, '\n').split(' ');
+          data.forEach((elem, index)=>{
+            if(!elem.split('"')[1]) return;
+            if(elem.includes('24/7')) data[index] = "";
+            if(elem.startsWith('group')) {
+              elemBRUH = elem.split('"')[1];
+              for(var i=index;i<index+10;i++) {
+                if (!data[i].includes(',')) {elemBRUH += " "+data[i];} else {elemBRUH += " "+data[i].split(',')[0]; data[index] = elemBRUH}
+              }
+            }
+          });
+        } else {
+          data.forEach((elem, index)=>{
+            if(!elem.split('"')[1]) return;
+            if(elem.includes('24/7')) data[index] = "" //patch out undefined if channel includes 24/7
+            if(elem.startsWith('group')) data[index] = ","+elem.split('"')[1]+" ~ "+elem.split('"')[2].replace(',', '');
+          })
+          }
+        data = data.join(' ').replace(/1 ,/g, '1,') ;
       }
       var lastName;
       var channels = {};
-      data = data.split('\r\n');
+      data = data.split('\n');
       for (var i in data) {
         var line = data[i];
         if (line.indexOf('#EXTINF:') != -1) {
           var set = line.split(':')[1].split(',');
-          var name = set[1];
+          var name = set[1]; 
           channels[name] = { no: set[0], name: name };
           lastName = name;
         } else if (line.indexOf('http') != -1 && lastName) {

@@ -7,7 +7,7 @@ var App = (function() {
 
   // Remote control keys
   var usedKeys = [
-    'Info',
+    'Info', 'Minus', 'PreviousChannel',
     'MediaPause', 'MediaPlay',
     'MediaPlayPause', 'MediaStop',
     'MediaFastForward', 'MediaRewind',
@@ -58,7 +58,16 @@ var App = (function() {
         log('video state:', Player.state);
         Player.nextAudio();
         break;
+      case 10190: //PreviousChannel
+        log('loading fluxus');
+        loadFluxus();
+        break;
+      case 189:
+        log('loading stratus');
+        loadStratus();
+        break;
       case 48: // Key 0
+        log('loading iptvEngNoNSFW');
         loadIPTVorg();
         break;
       case 49: // Key 1
@@ -76,6 +85,7 @@ var App = (function() {
       case 55: // Key 7
       case 56: // Key 8
       case 57: // Key 9
+        log('loading local');
         loadLocal()
         break;
       // default:
@@ -84,6 +94,38 @@ var App = (function() {
     }
   });
 
+  function loadFluxus() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://pastebin.com/raw/ZzGTySZE', true);
+    xhr.send(null);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 0 || xhr.status == 200) {
+          var channels = Parser.parse(xhr.responseText);
+          UI.setChannels(channels);
+          Player.init(tv);
+        } else {
+          log('Error loading playlist:', xhr.status);
+        }
+      }
+    };
+  };
+  function loadStratus() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://pastebin.com/raw/4cQ9mj8X', true);
+    xhr.send(null);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 0 || xhr.status == 200) {
+          var channels = Parser.parse(xhr.responseText);
+          UI.setChannels(channels);
+          Player.init(tv);
+        } else {
+          log('Error loading playlist:', xhr.status);
+        }
+      }
+    };
+  };
   function loadIPTVorg() {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'data/iptv-org-eng.m3u8', true);
