@@ -147,7 +147,7 @@ ul {
   #channel-list:empty:after {
     display: block;
     padding-top: 100%;
-    color: #3080ba;
+    color: #222831;
     font-weight: bold;
     text-align: center;
     content: 'Loading playlist...';
@@ -160,11 +160,11 @@ ul {
   
   #channel-list li.playing {
     font-weight: bold;
-    background: #d80a41;
+    background: #322f3d;
   }
 
   #channel-list li.selected {
-    background: #3080ba;
+    background: #222831;
     transition: all .3s;
   }
 

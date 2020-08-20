@@ -67,9 +67,6 @@ var App = (function() {
         loadStratus();
         break;
       case 48: // Key 0
-        log('loading iptvEngNoNSFW');
-        loadIPTVorg();
-        break;
       case 49: // Key 1
         Player.set4k(true)
         break;
@@ -83,6 +80,9 @@ var App = (function() {
         break;
       case 54: // Key 6
       case 55: // Key 7
+        log('loading iptvEngNoNSFW');
+        loadIPTVorg();
+        break;
       case 56: // Key 8
       case 57: // Key 9
         log('loading local');
@@ -93,7 +93,7 @@ var App = (function() {
         break;
     }
   });
-
+  
   function loadFluxus() {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'https://pastebin.com/raw/ZzGTySZE', true);
