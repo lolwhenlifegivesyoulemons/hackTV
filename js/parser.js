@@ -2,21 +2,20 @@
 
 var Parser = (function() {
   return {
-    // Very simple m3u parser
+    // Very unsimple m3u parser
     parse: function(data) {
-        //shoutout to danktrain :)
-        dat = data;
-        data = [];
-        dat = dat.split('group-title="');
-        dat.shift();
-        for (let i = 0; i < dat.length; i++) {
-            data.push(dat[i].split('\n')[0]+"\n"+dat[i].split('\n')[1]);
-        }
-        dat.forEach((elem, index)=>{
-            if(elem.includes('LABEL')) return dat.splice(index, 1);
-        })
-        dat = "#EXTM3U\n#EXTINF:-1,"+dat.join("\n#EXTINF:-1,").replace("\",", " ~ ");
-        data = dat;
+      //shoutout to danktrain :)
+      var dat = data;
+      data = [];
+      dat = dat.split('group-title="');
+      dat.shift();
+      for (let i = 0; i < dat.length; i++) {
+          data.push(dat[i].split('\n')[0]+"\n"+dat[i].split('\n')[1]);
+      }
+      data.forEach((elem, index)=>{
+          if(elem.includes('LABEL')) return data.splice(index, 1);
+      })
+      data = "#EXTM3U\n#EXTINF:-1,"+data.join("\n#EXTINF:-1,").replace(/",/g, " ~ ");
       var lastName;
       var channels = {};
       data = data.split('\n');
