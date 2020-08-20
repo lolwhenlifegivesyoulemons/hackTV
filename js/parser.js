@@ -15,7 +15,7 @@ var Parser = (function() {
       data.forEach((elem, index)=>{
           if(elem.includes('LABEL')) return data.splice(index, 1);
       })
-      data = "#EXTM3U\n#EXTINF:-1,"+data.join("\n#EXTINF:-1,").replace(/",/g, " ~ ");
+      data = "#EXTM3U\n#EXTINF:-1,Focus Custom Playlist Value\nhttp://focusLink\n#EXTINF:-1,Press PreviousChannel to unfocus.\nhttp://placeholder\n#EXTINF:-1,Load Custom Playlist\nhttp://loadPlaylist\n#EXTINF:-1,"+data.join("\n#EXTINF:-1,").replace(/",/g, " ~ ");
       var lastName;
       var channels = {};
       data = data.split('\n');
@@ -26,7 +26,7 @@ var Parser = (function() {
           var name = set[1]; 
           channels[name] = { no: set[0], name: name };
           lastName = name;
-        } else if (line.indexOf('http') != -1 && lastName) {
+        } else if (!line.startsWith('#EXTM3U') && line.indexOf('http') != -1 && lastName) {
           channels[lastName].url = line;
           lastName = null;
         }

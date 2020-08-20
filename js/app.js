@@ -59,8 +59,8 @@ var App = (function() {
         Player.nextAudio();
         break;
       case 10190: //PreviousChannel
-        log('loading fluxus');
-        loadFluxus();
+        document.getElementById('link').style.opacity = "0";
+        document.getElementById('link').blur();
         break;
       case 189: //Minus
         log('loading stratus');
@@ -93,23 +93,6 @@ var App = (function() {
         break;
     }
   });
-  
-  function loadFluxus() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://pastebin.com/raw/ZzGTySZE', true);
-    xhr.send(null);
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState == 4) {
-        if (xhr.status == 0 || xhr.status == 200) {
-          var channels = Parser.parse(xhr.responseText);
-          UI.setChannels(channels);
-          Player.init(tv);
-        } else {
-          log('Error loading playlist:', xhr.status);
-        }
-      }
-    };
-  };
   function loadStratus() {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'https://pastebin.com/raw/4cQ9mj8X', true);

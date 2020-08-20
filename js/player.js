@@ -52,6 +52,27 @@ var Player = (function() {
         UI.play();
         return webapis.avplay.play();
       }
+      if (url == "http://focusLink") {
+        document.getElementById('link').style.opacity = "100";
+        document.getElementById('link').focus();
+      }
+      if (url == "http://placeholder") {};
+      if (url == "http://loadPlaylist") {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.send(null);
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4) {
+            if (xhr.status == 0 || xhr.status == 200) {
+              var channels = Parser.parse(xhr.responseText);
+              UI.setChannels(channels);
+              Player.init(tv);
+            } else {
+              log('Error loading playlist:', xhr.status);
+            }
+          }
+        };
+      }
       log('prepare and play:', url);
       playerUrl = url;
       audioTrack = 1;
