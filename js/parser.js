@@ -4,36 +4,19 @@ var Parser = (function() {
   return {
     // Very simple m3u parser
     parse: function(data) {
-      if (data.includes('tvg')) {
-        //i hate tvgs and group stuff :(
-        data = data.split(' ');
-        data.forEach((elem, index)=>{
-          if(elem.includes('tvg-')) data.splice(index, 1);
-        });
-        data.forEach((elem, index)=>{
-          if(elem.includes('tvg-logo')) data.splice(index, 1);
-        });
-        if(data.includes('\n\n')) {
-          data = data.join(' ').replace(/\n\n/g, '\n').split(' ');
-          data.forEach((elem, index)=>{
-            if(!elem.split('"')[1]) return;
-            if(elem.includes('24/7')) data[index] = "";
-            if(elem.startsWith('group')) {
-              elemBRUH = elem.split('"')[1];
-              for(var i=index;i<index+10;i++) {
-                if (!data[i].includes(',')) {elemBRUH += " "+data[i];} else {elemBRUH += " "+data[i].split(',')[0]; data[index] = elemBRUH}
-              }
-            }
-          });
-        } else {
-          data.forEach((elem, index)=>{
-            if(!elem.split('"')[1]) return;
-            if(elem.includes('24/7')) data[index] = "" //patch out undefined if channel includes 24/7
-            if(elem.startsWith('group')) data[index] = ","+elem.split('"')[1]+" ~ "+elem.split('"')[2].replace(',', '');
-          })
-          }
-        data = data.join(' ').replace(/1 ,/g, '1,') ;
-      }
+        //shoutout to danktrain :)
+        dat = data;
+        data = [];
+        dat = dat.split('group-title="');
+        dat.shift();
+        for (let i = 0; i < dat.length; i++) {
+            data.push(dat[i].split('\n')[0]+"\n"+dat[i].split('\n')[1]);
+        }
+        dat.forEach((elem, index)=>{
+            if(elem.includes('LABEL')) return dat.splice(index, 1);
+        })
+        dat = "#EXTM3U\n#EXTINF:-1,"+dat.join("\n#EXTINF:-1,").replace("\",", " ~ ");
+        data = dat;
       var lastName;
       var channels = {};
       data = data.split('\n');

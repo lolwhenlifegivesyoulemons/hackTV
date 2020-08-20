@@ -62,7 +62,7 @@ var App = (function() {
         log('loading fluxus');
         loadFluxus();
         break;
-      case 189:
+      case 189: //Minus
         log('loading stratus');
         loadStratus();
         break;

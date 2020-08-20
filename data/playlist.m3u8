@@ -1,8 +1,12 @@
 #EXTM3U
 #EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/FOX_Sports_logo.svg/1280px-FOX_Sports_logo.svg.png" group-title="UK",Fox Sports
 http://45.58.62.92:8080
-#EXTINF:-1,TNT
-http://weak_spell.fadev.club/edge/TNT/playlist.m3u8
+#EXTINF:-1 group-title="Sports",HelenaStreams 1
+http://34.89.92.138/hls/V-1/playlist.m3u8
+#EXTINF:-1 group-title="Sports",HelenaStreams 2
+http://34.89.92.138/hls/V-1/playlist.m3u8
+#EXTINF:-1 group-title="Sports",HelenaStreams 3
+http://34.89.92.138/hls/V-1/playlist.m3u8
 #EXTINF:-1 tvg-id="" tvg-name="" tvg-language="English" tvg-logo="https://scripps.com/wp-content/uploads/2019/01/local_media_23_abc.png" tvg-country="US" tvg-url="" group-title="Local",23 ABC (KERO)
 https://content.uplynk.com/channel/ff809e6d9ec34109abfb333f0d4444b5.m3u8
 #EXTINF:-1 tvg-id="" tvg-name="" tvg-language="English" tvg-logo="http://www.247retro.com/images/sidebar_logo_gradient.jpg" tvg-country="US" tvg-url="" group-title="Movies",24/7 Retro TV
