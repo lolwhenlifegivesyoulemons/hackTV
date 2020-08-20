@@ -80,8 +80,8 @@ var App = (function() {
         break;
       case 54: // Key 6
       case 55: // Key 7
-        log('loading iptvEngNoNSFW');
-        loadIPTVorg();
+        log('loading hackTVplaylist');
+        loadHackTV();
         break;
       case 56: // Key 8
       case 57: // Key 9
@@ -109,9 +109,9 @@ var App = (function() {
       }
     };
   };
-  function loadIPTVorg() {
+  function loadHackTV() {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'data/iptv-org-eng.m3u8', true);
+    xhr.open('GET', 'https://pastebin.com/raw/2xNrbLXH', true);
     xhr.send(null);
     xhr.onreadystatechange = function() {
       if (xhr.readyState == 4) {
@@ -127,7 +127,7 @@ var App = (function() {
   };
   function loadLocal() {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'data/playlist.m3u8 ', true);
+    xhr.open('GET', 'data/playlist.m3u8', true);
     xhr.send(null);
     xhr.onreadystatechange = function() {
       if (xhr.readyState == 4) {
