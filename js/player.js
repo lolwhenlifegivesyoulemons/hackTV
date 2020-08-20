@@ -59,7 +59,7 @@ var Player = (function() {
       if (url == "http://placeholder") {};
       if (url == "http://loadPlaylist") {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
+        xhr.open('GET', document.getElementById('link').value, true);
         xhr.send(null);
         xhr.onreadystatechange = function() {
           if (xhr.readyState == 4) {
