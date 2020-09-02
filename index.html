@@ -1,37 +1,15 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
+<head>
     <title>hackTV</title>
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Samsung's WebAPI -->
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <script src='$WEBAPIS/webapis/webapis.js'></script>
-    <!-- Components -->
-    <script src="js/logger.js"></script>
-    <script src="js/parser.js"></script>
-    <script src="js/ui.js"></script>
-    <script src="js/player.js"></script>
-    <!-- Application -->
-    <script src="js/app.js"></script>
-  </head>
-  <body>
-    <input id="link" placeholder="Input Link Here" style="opacity:0;"/>
-    <div class="header">
-      <h1>hackTV</h1>
-      <div class="build"></div>
-      <div class="cpu"></div>
-    </div>
-    <div class="section">
-      <div class="sidebar">
-        <ul id="channel-list"></ul>
-      </div>
-      <div class="screen">
-        <div class="info">
-          <div id="message" class="hide"></div>
-        </div>
-        <object id='av-player' type='application/avplayer'></object>
-      </div>
-    </div>
-    <div id="log" class="hide"></div>
-  </body>
+    <script src="./js/ui.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/parser.js"></script>
+    <script src="./js/player.js"></script>
+</head>
+<body><h1 id="banner"></h1><div class="header"><img class="icon" height="128" width="128" src="icon.png"><h1>hackTV</h1><object id='av-player' type='application/avplayer' class="NO"></object></div>
+<div id="channelList"></div>
+</body>
 </html>
